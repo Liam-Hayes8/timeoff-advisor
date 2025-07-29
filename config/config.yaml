@@ -1,0 +1,59 @@
+# Workday Time-Off Advisor Configuration
+
+# Model Configuration
+model:
+  provider: "anthropic"
+  model_name: "claude-3-sonnet-20240229"
+  temperature: 0.1
+  max_tokens: 4000
+  top_p: 0.9
+
+# Vector Store Configuration
+vector_store:
+  type: "chromadb"
+  collection_name: "workday_timeoff_docs"
+  embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+  chunk_size: 1000
+  chunk_overlap: 200
+  similarity_threshold: 0.7
+
+# Document Processing
+documents:
+  supported_formats:
+    - ".pdf"
+    - ".docx"
+    - ".txt"
+    - ".md"
+  data_directory: "data/workday_docs"
+  sample_data_directory: "data/sample_data"
+
+# Agent Configuration
+agent:
+  name: "Workday Time-Off Advisor"
+  description: "An intelligent agent that helps with Workday time-off policies and procedures"
+  max_iterations: 5
+  verbose: true
+  
+# Retrieval Configuration
+retrieval:
+  top_k: 5
+  include_metadata: true
+  rerank_results: false
+
+# Data Processing
+data_processing:
+  date_format: "%Y-%m-%d"
+  timezone: "UTC"
+  default_currency: "USD"
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/timeoff_advisor.log"
+
+# UI Configuration
+ui:
+  welcome_message: "Welcome to the Workday Time-Off Advisor! How can I help you today?"
+  max_response_length: 2000
+  show_confidence: true 
